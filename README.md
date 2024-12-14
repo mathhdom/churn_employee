@@ -1,67 +1,67 @@
-# Identificar colaboradores que podem deixar a empresa
+# Identifying Employees Who May Leave the Company
 
-O objetivo deste projeto é desenvolver um modelo de machine learning para prever se um colaborador de uma empresa deixará o emprego.. Com base nessas previsões, a empresa poderá identificar colaboradores em risco e implementar ações preventivas. 
+The objective of this project is to develop a machine learning model to predict whether an employee will leave the company. Based on these predictions, the company can identify at-risk employees and implement preventive actions.
 
-# Dados
+# Data
 
-Os dados foram obtidos a partir de um dataset do kaggle, através do link abaixo:
+The data was obtained from a Kaggle dataset, accessible via the link below:
 
 - link: [https://www.kaggle.com/datasets/kmldas/hr-employee-data-descriptive-analytics/code]
 
-# Análise Exploratória (EDA)
+# Exploratory Data Analysis
 
-Balanceamento:
-- A variável alvo está desbalanceada no dataset. Cerca de 76% dos colaboradores continuam na empresa, enquanto 24% já saíram.
+Balancing:
+- The target variable is imbalanced in the dataset. Around 76% of employees stay with the company, while 24% have already left.
 
-Correlação:
-- A matriz de correlação mostra que não há relações lineares fortes entre as variáveis independentes e a variável dependente ('left'). Portanto, algorítimos baseados em árvore podem captar relação não lineares, como o RandomForest
+Correlation:
+- The correlation matrix shows that there are no strong linear relationships between the independent variables and the dependent variable ('left'). Therefore, tree-based algorithms can capture non-linear relationships, such as Random Forest.
 
-Nível de satisfação
-- Avaliando os níveis de satisfação e comparando-os com a saída ou não dos colaboradores, é possível notar que colaboradores com nível de satisfação maior tendem a continuar na empresa, comprovado pelo teste de hipótese.
-- O Teste de Mann-Whitney foi aplicado pois não se pode assumir normalidade na distribuição dos dados, além de considerar que o dataset é uma amostra limitada em um período de tempo. Portanto, não é possível afirmar que todo o dataset representa toda a população.
+Satisfaction Level:
+- By evaluating satisfaction levels and comparing them with whether employees left or stayed, it is noticeable that employees with higher satisfaction tend to stay with the company, as confirmed by the hypothesis test.
+- The Mann-Whitney test was applied because normality cannot be assumed in the data distribution, and also considering that the dataset is a limited sample from a specific time period. Therefore, it is not possible to claim that the entire dataset represents the entire population.
 
-# Tecnologias utilizadas
+# Technologies Used
 
 - Python
 - Pandas
 - NumPy
 - Scikit-learn
-- SciPy (teste não paramétrico)
+- SciPy (non-parametric test)
 
-# Modelagem
+# Modeling
 
-Escolha da métrica de desempenho:
-- O objetivo é aumentar a performance do recall, visto que o problema de negócio ressalta a importância de prever corretamente as pessoas que irão sair da empresa para promover ações.
-- É preferível mover ações em pessoas que não iriam deixar a empresa do que não promover ações em pessoas que realmente vão deixar a empresa.
+Choice of Performance Metric:
+- The goal is to increase recall performance, as the business problem emphasizes the importance of correctly predicting those who will leave the company to promote actions.
+- It is preferable to take actions for individuals who would not leave the company than to fail to take action for those who will leave.
 
-Pré-Processamento:
-- Variáveis nominais como Department foram codificadas com OneHotEncoder.
-- A variável ordinal salary foi codificada respeitando sua hierarquia (“low”, “medium”, “high”).
-- O método Nearmiss foi utilizado para balancear as classes reduzindo a classe majoritária
-- O algoritmo K-Means foi aplicado para criar uma representação categória da variável satisfaction_level, baseando a escolha de 'k' pelo método do cotovelo
+Preprocessing:
+- Nominal variables such as Department were encoded using OneHotEncoder.
+- The ordinal variable salary was encoded respecting its hierarchy (“low”, “medium”, “high”).
+- The Nearmiss method was used to balance the classes by reducing the majority class.
+- The K-Means algorithm was applied to create a categorical representation of the satisfaction_level variable, with the choice of 'k' based on the elbow method.
 
-# Resultados
+# Results
 
-Modelo Inicial:
-- Algoritmo: Random Forest.
-- Acurácia: 94%
+Initial Model:
+- Algorithm: Random Forest.
+- Accuracy: 94%
 - Precision: 98%
 - Recall: 76%
 - ROC-AUC: 88%
 
-Modelo Final (após otimizações):
-- Algoritmo: Random Forest.
-- Acurácia: 97%
+Final Model (after optimizations):
+- Algorithm: Random Forest.
+- Accuracy: 97%
 - Precision: 91%
 - Recall: 96%
 - ROC-AUC: 96%
 
-# Conclusão
+# Conclusion
 
-O projeto alcançou seu objetivo, melhorando significativamente o recall do modelo final em comparação ao modelo inicial, permitindo classificar de forma eficiente potenciais colaboradores a deixarem a empresa para promover ações de mitigação.
+The project achieved its goal by significantly improving the recall of the final model compared to the initial model, enabling efficient classification of potential employees who may leave the company to implement mitigation actions.
 
-Nota-se que o modelo entende que o departamento do colaborador não é relevante para uma pessoa deixar ou não a empresa.
+It is noted that the model understands that the employee's department is not relevant for predicting whether they will leave the company.
 
-A implementação de validações com dados reais é necessária para validar o impacto das ações preventivas sugeridas pelo modelo.
+The implementation of validations with real data is necessary to validate the impact of the preventive actions suggested by the model.
 
-Talvez a aplicação de outros modelos podem trazer possíveis ganhos no desempenho, por exemplo o XGBoost, além da busca de novas variáveis.
+The application of other models, such as XGBoost, and the search for new variables may potentially improve performance.
